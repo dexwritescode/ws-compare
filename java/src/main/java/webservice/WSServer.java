@@ -1,37 +1,38 @@
 package webservice;
 
-import akka.actor.ActorRef;
-import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.model.StatusCodes;
 import akka.http.javadsl.server.HttpApp;
 import akka.http.javadsl.server.Route;
-import akka.pattern.Patterns;
-import webservice.HelloMessages.GetHelloMessage;
 
-import java.util.concurrent.CompletionStage;
+import static akka.http.javadsl.server.PathMatchers.*;
 
 public class WSServer extends HttpApp {
-    private final ActorRef helloActor;
+    private final HelloService helloService;
+    private final FibonacciService fibonacciService;
 
-    java.time.Duration timeout = java.time.Duration.ofSeconds(5);
-
-    WSServer(ActorRef helloActor) {
-        this.helloActor = helloActor;
+    WSServer() {
+        this.helloService = new HelloService();
+        this.fibonacciService = new FibonacciService();
     }
 
     @Override
     public Route routes() {
-        return path("hello", this::getHello);
+        return getAllRoutes();
     }
 
-    private Route getHello() {
-        return get(() -> {
-            CompletionStage<String> helloCompletionStage = Patterns.ask(helloActor, new GetHelloMessage(), timeout)
-                    .thenApply(obj -> (String) obj);
+    private Route getAllRoutes() {
 
-            return onSuccess(() -> helloCompletionStage, performed -> {
-                return complete(StatusCodes.OK, performed, Jackson.marshaller());
-            });
-        });
+        return get(() -> concat(
+                path(segment("hello").slash(remaining()), this::hello),
+                path(segment("fibonacci").slash(longSegment()), this::fibonacci)
+        ));
+    }
+
+    private Route hello(String name) {
+        return complete(StatusCodes.OK, helloService.getHello(name));
+    }
+
+    private Route fibonacci(long number) {
+        return complete(StatusCodes.OK, String.valueOf(fibonacciService.getFibonacci(number)));
     }
 }
