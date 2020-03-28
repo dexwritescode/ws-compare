@@ -6,6 +6,7 @@ Three, functionally similar web services, written in Java, Go, and Rust.
 
 | Route                    | Request        | Response                     |
 |:-------------------------|:---------------|:-----------------------------|
+| GET /                    | /              | "ws-compare"                 |
 | GET /hello/{name}        | /hello/World   | "Hello, World!"              |
 | GET /fibonacci/{number}  | /fibonacci/45  | 1134903170                   |
 |       |        |         |

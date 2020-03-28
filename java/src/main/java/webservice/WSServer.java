@@ -23,16 +23,20 @@ public class WSServer extends HttpApp {
     private Route getAllRoutes() {
 
         return get(() -> concat(
+                path("", this::root),
                 path(segment("hello").slash(remaining()), this::hello),
                 path(segment("fibonacci").slash(longSegment()), this::fibonacci)
         ));
     }
 
+    private Route root() {
+        return complete("ws-compare");
+    }
     private Route hello(String name) {
-        return complete(StatusCodes.OK, helloService.getHello(name));
+        return complete(helloService.getHello(name));
     }
 
     private Route fibonacci(long number) {
-        return complete(StatusCodes.OK, String.valueOf(fibonacciService.getFibonacci(number)));
+        return complete(String.valueOf(fibonacciService.getFibonacci(number)));
     }
 }
