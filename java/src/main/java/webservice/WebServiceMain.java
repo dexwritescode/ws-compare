@@ -2,7 +2,7 @@ package webservice;
 
 import akka.actor.ActorSystem;
 
-public class WebService {
+public class WebServiceMain {
 
     public static void main(String[] args) throws Exception {
         ActorSystem system = ActorSystem.create("webserviceServer");

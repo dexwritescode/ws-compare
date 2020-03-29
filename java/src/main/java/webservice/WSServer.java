@@ -1,18 +1,24 @@
 package webservice;
 
+import akka.http.javadsl.marshallers.jackson.Jackson;
 import akka.http.javadsl.model.StatusCodes;
 import akka.http.javadsl.server.HttpApp;
 import akka.http.javadsl.server.Route;
+import webservice.fibonacci.FibonacciService;
+import webservice.greeting.GreetingService;
+import webservice.hello.HelloService;
 
 import static akka.http.javadsl.server.PathMatchers.*;
 
 public class WSServer extends HttpApp {
-    private final HelloService helloService;
+    private final GreetingService greetingService;
     private final FibonacciService fibonacciService;
+    private final HelloService helloService;
 
     WSServer() {
-        this.helloService = new HelloService();
+        this.greetingService = new GreetingService();
         this.fibonacciService = new FibonacciService();
+        this.helloService = new HelloService();
     }
 
     @Override
@@ -23,20 +29,22 @@ public class WSServer extends HttpApp {
     private Route getAllRoutes() {
 
         return get(() -> concat(
-                path("", this::root),
-                path(segment("hello").slash(remaining()), this::hello),
+                path("hello", this::helloWorld),
+                path(segment("greeting").slash(remaining()), this::greeting),
                 path(segment("fibonacci").slash(longSegment()), this::fibonacci)
         ));
     }
 
-    private Route root() {
-        return complete("ws-compare");
+    private Route helloWorld() {
+
+        return complete(StatusCodes.OK, helloService.hello(), Jackson.marshaller());
     }
-    private Route hello(String name) {
-        return complete(helloService.getHello(name));
+
+    private Route greeting(String name) {
+        return complete(StatusCodes.OK, greetingService.greet(name), Jackson.marshaller());
     }
 
     private Route fibonacci(long number) {
-        return complete(String.valueOf(fibonacciService.getFibonacci(number)));
+        return complete(StatusCodes.OK, fibonacciService.fibonacci(number), Jackson.marshaller());
     }
 }

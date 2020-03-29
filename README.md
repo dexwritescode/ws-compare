@@ -4,11 +4,11 @@ Three, functionally similar web services, written in Java, Go, and Rust.
 
 ## Routes
 
-| Route                    | Request        | Response                     |
-|:-------------------------|:---------------|:-----------------------------|
-| GET /                    | /              | "ws-compare"                 |
-| GET /hello/{name}        | /hello/World   | "Hello, World!"              |
-| GET /fibonacci/{number}  | /fibonacci/45  | 1134903170                   |
+| Route                    | Request          | Response                          |
+|:-------------------------|:-----------------|:----------------------------------|
+| GET /hello               | /hello           | {"message":"Hello, World"}        |
+| GET /greeting/{name}     | /greeting/Jane   | {"greeting":"Hello, Jane!"}       |
+| GET /fibonacci/{number}  | /fibonacci/45    | {"input":45,"output":1134903170}  |
 |       |        |         |
 
 
