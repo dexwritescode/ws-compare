@@ -28,7 +28,7 @@ In the java folder issue the command:
 java -jar target/webservice-1.0-SNAPSHOT-allinone.jar
 ```
 ### Test
-* Fr example, using curl:  
+* For example, using curl:  
 ```cmd
 curl http://localhost:8080/fibonacci/20
 ```
@@ -43,9 +43,6 @@ curl http://localhost:8080/fibonacci/20
 - This project I wrote to compare some metrics using different programming languages. The metrics I was looking for:
     - Compiled artifact size
     - Size in memory while running idle
-    - Size in memory while running at peak
+    - Size in memory while running at peak requests per second
     - Average requests per second
-
-
-
 
