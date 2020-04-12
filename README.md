@@ -12,31 +12,43 @@ Three, functionally similar web services, written in Java, Go, and Rust.
 
 
 # Build and Run
+  For each version of the program, issue the command from the language folder.
 ## Java
+
+### Dependencies
+* [Akka](https://akka.io/)
+ 
 ### Build
-In the java folder:
-* Run the command: 
-```cmd
-mvn package
-```  
-* The output should be in the ```target``` folder: 
-```webservice-1.0-SNAPSHOT-allinone.jar```
+    mvn package
+
+  The compiled program should now be in the `target` folder: 
+    
+    webservice-1.0-allinone.jar
 
 ### Run
-In the java folder issue the command: 
+    java -jar target/webservice-1.0-allinone.jar
+
+## Test it
+  For example, using curl:  
+
+    curl http://localhost:8080/fibonacci/20
+
+  The response should be:
+
+    {"input":20,"output":6765}
+
+
+### Benchmark
+## Using [wrk](https://github.com/wg/wrk)
+Default timeout (2 seconds)
 ```cmd
-java -jar target/webservice-1.0-SNAPSHOT-allinone.jar
-```
-### Test
-* For example, using curl:  
-```cmd
-curl http://localhost:8080/fibonacci/20
-```
-* The response should be:
-```json
-{"input":20,"output":6765}
+wrk -t2 -c400 -d30s http://127.0.0.1:8080/fibonacci/25
 ```
 
+* Extended the timeout (5 seconds)
+```cmd
+wrk -t2 -c400 -d30s http://127.0.0.1:8080/fibonacci/25 --timeout 5
+```
 
 ## Notes:
 - The code is not suitable for production use. And is not idiomatic to each language. Also, lacks tests and documentation.
@@ -44,5 +56,5 @@ curl http://localhost:8080/fibonacci/20
     - Compiled artifact size
     - Size in memory while running idle
     - Size in memory while running at peak requests per second
-    - Average requests per second
-
+    - Requests per second, latency, and timeouts
+    - Packaged artifact with the relevant runtime. (Docker image)

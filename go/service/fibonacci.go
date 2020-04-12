@@ -17,13 +17,13 @@ func NewFibonacciService() *FibonacciService {
 func (fs *FibonacciService) GetFibonacci(number int) *model.Fibonacci {
 	var f model.Fibonacci
 	f.Input = number
-	f.Output = fibonacci(number)
+	f.Output = fibonacci(int64(number))
 	return &f
 }
 
-func fibonacci(number int) int64 {
+func fibonacci(number int64) int64 {
 	if number <= 1 {
-		return int64(number)
+		return number
 	}
 	return fibonacci(number-1) + fibonacci(number-2)
 }
