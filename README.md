@@ -1,6 +1,7 @@
 # ws-compare
 Three, functionally similar web services, written in Java, Go, and Rust.
 
+  The main motivation for writing these three simple web services is to compare the three languages, in this case Java, Go, and Rust.
 
 ## Endpoints
 
@@ -12,7 +13,8 @@ Three, functionally similar web services, written in Java, Go, and Rust.
 
 
 # Build and Run
-  For each version of the program, issue the command from the language folder.
+  For each version of the program, issue the commands from the specific language folder.
+
 ## Java
 
 ### Dependencies
@@ -28,27 +30,45 @@ Three, functionally similar web services, written in Java, Go, and Rust.
 ### Run
     java -jar target/webservice-1.0-allinone.jar
 
-## Test it
+## Go
+
+### Dependencies
+* [Echo](https://echo.labstack.com/)
+ 
+### Build
+    go build -o webservice
+
+  The compiled program should now be in the `ws-compare/go` folder: 
+    
+    webservice
+
+### Run
+    ./webservice
+
+## Rust
+### Dependencies
+### Build
+### Run
+
+## Testing it
   For example, using curl:  
 
     curl http://localhost:8080/fibonacci/20
 
   The response should be:
 
-    {"input":20,"output":6765}
+    {"input":20,"output":75025}
 
-
-### Benchmark
+# Benchmark
 ## Using [wrk](https://github.com/wg/wrk)
-Default timeout (2 seconds)
-```cmd
-wrk -t2 -c400 -d30s http://127.0.0.1:8080/fibonacci/25
-```
+  Default timeout (2 seconds)
 
-* Extended the timeout (5 seconds)
-```cmd
-wrk -t2 -c400 -d30s http://127.0.0.1:8080/fibonacci/25 --timeout 5
-```
+    wrk -t2 -c400 -d30s http://127.0.0.1:8080/fibonacci/25
+
+
+  Extended timeout (5 seconds)
+
+    wrk -t2 -c400 -d30s http://127.0.0.1:8080/fibonacci/25 --timeout 5
 
 ## Notes:
 - The code is not suitable for production use. And is not idiomatic to each language. Also, lacks tests and documentation.
@@ -57,4 +77,4 @@ wrk -t2 -c400 -d30s http://127.0.0.1:8080/fibonacci/25 --timeout 5
     - Size in memory while running idle
     - Size in memory while running at peak requests per second
     - Requests per second, latency, and timeouts
-    - Packaged artifact with the relevant runtime. (Docker image)
+    - Packaged, deployment ready build with the relevant runtime. (Docker image)
