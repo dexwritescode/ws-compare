@@ -10,7 +10,7 @@ import (
 type GreetingService struct {
 }
 
-// NewGreetingService Returns a new HelloService
+// NewGreetingService Returns a new GreetingService
 func NewGreetingService() *GreetingService {
 	return &GreetingService{}
 }

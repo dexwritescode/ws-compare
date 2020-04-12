@@ -10,7 +10,8 @@ func main() {
 	e := echo.New()
 	helloWorld := service.NewHelloWorldService()
 	greeting := service.NewGreetingService()
-	handler := handler.NewHandler(helloWorld, greeting)
+	fibonacci := service.NewFibonacciService()
+	handler := handler.NewHandler(helloWorld, greeting, fibonacci)
 	handler.Register(e)
 	e.Logger.Fatal(e.Start(":8080"))
 }

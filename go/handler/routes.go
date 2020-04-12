@@ -8,4 +8,5 @@ import (
 func (h *Handler) Register(e *echo.Echo) {
 	e.GET("/", h.GetHelloWorld)
 	e.GET("/greeting/:name", h.GetGreeting)
+	e.GET("/fibonacci/:number", h.GetFibonacci)
 }
