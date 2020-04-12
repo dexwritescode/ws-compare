@@ -7,4 +7,5 @@ import (
 // Register Registers the routes
 func (h *Handler) Register(e *echo.Echo) {
 	e.GET("/", h.GetHelloWorld)
+	e.GET("/greeting/:name", h.GetGreeting)
 }

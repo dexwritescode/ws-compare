@@ -9,6 +9,5 @@ import (
 // GetHelloWorld returns JSON GetHelloWorld response
 func (h *Handler) GetHelloWorld(c echo.Context) error {
 	hello := h.helloWorld.GetHelloWorld()
-	res := newHelloWorldResponse(c, hello)
-	return c.JSON(http.StatusOK, res)
+	return c.JSON(http.StatusOK, newHelloWorldResponse(c, hello))
 }
