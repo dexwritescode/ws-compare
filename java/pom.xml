@@ -36,6 +36,7 @@
                             <goal>shade</goal>
                         </goals>
                         <configuration>
+                            <finalName>webservice</finalName>
                             <shadedArtifactAttached>true</shadedArtifactAttached>
                             <shadedClassifierName>allinone</shadedClassifierName>
                             <artifactSet>
@@ -82,12 +83,6 @@
             <groupId>com.typesafe.akka</groupId>
             <artifactId>akka-serialization-jackson_2.12</artifactId>
             <version>${akka.stream.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.typesafe.akka</groupId>
-            <artifactId>akka-http-testkit_2.12</artifactId>
-            <version>${akka.http.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
