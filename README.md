@@ -1,7 +1,7 @@
 # ws-compare
 Three, functionally similar web services, written in Java, Go, and Rust.
 
-  The main motivation for writing these three simple web services is to compare the three languages, in this case Java, Go, and Rust.
+  The main motivation for writing these three simple web services, is to compare the three languages, Java, Go, and Rust.
 
 ## Endpoints
 
@@ -23,12 +23,12 @@ Three, functionally similar web services, written in Java, Go, and Rust.
 ### Build
     mvn package
 
-  The compiled program should now be in the `target` folder: 
+  The compiled program (executable jar) should now be in the `ws-compare/java/target` folder: 
     
-    webservice-1.0-allinone.jar
+    webservice.jar
 
 ### Run
-    java -jar target/webservice-1.0-allinone.jar
+    java -jar target/webservice.jar
 
 ## Go
 
@@ -78,3 +78,4 @@ Three, functionally similar web services, written in Java, Go, and Rust.
     - Size in memory while running at peak requests per second
     - Requests per second, latency, and timeouts
     - Packaged, deployment ready build with the relevant runtime. (Docker image)
+    - Compile/build time
