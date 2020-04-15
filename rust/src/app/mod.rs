@@ -1,9 +1,11 @@
-use actix_web::{HttpServer, App, web, HttpRequest, Responder, HttpResponse};
-use serde::Serialize;
+use actix_web::{HttpServer, App, web};
+
+mod hello;
+mod greet;
 
 pub fn start() {
     let bind_address = "127.0.0.1:8080";
-    HttpServer::new(move|| {
+    HttpServer::new(|| {
         App::new().configure(routes)
         })
         .bind(&bind_address)
@@ -15,28 +17,7 @@ pub fn start() {
 
 fn routes(app: &mut web::ServiceConfig) {
     app
-        .route("/", web::get().to(get_hello))
-        .route("/greeting/{name}", web::get().to(greet));
+        .route("/", web::get().to(hello::get))
+        .route("/greeting/{name}", web::get().to(greet::get));
 }
 
-async fn greet(req: HttpRequest) -> impl Responder {
-    let name = req.match_info().get("name").unwrap_or("World");
-    HttpResponse::Ok().body(format!("Hello, {}!", &name))
-}
-
-async fn get_hello(_req: HttpRequest) -> impl Responder {
-    HttpResponse::Ok().json(HelloResponse::get())
-}
-
-#[derive(Serialize)]
-pub struct HelloResponse {
-    pub message: &'static str,
-}
-
-impl HelloResponse {
-    fn get() -> Self {
-        HelloResponse {
-            message: "Hello, World!"
-        }
-    }
-}
