@@ -1,13 +1,13 @@
 use actix_web::{Responder, HttpResponse, web};
 use serde::Deserialize;
 
-mod greeting;
+mod fibonacci;
 
 #[derive(Deserialize)]
 pub struct Info {
-    name: String,
+    input: i64,
 }
 
 pub async fn get(info: web::Path<Info>) -> impl Responder {
-    HttpResponse::Ok().json(greeting::get(&info.name))
+    HttpResponse::Ok().json(fibonacci::get(info.input))
 }

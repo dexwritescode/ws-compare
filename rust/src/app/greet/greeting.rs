@@ -13,10 +13,9 @@ impl GreetingResponse {
     }
 }
 
-pub fn get(name: String) -> GreetingResponse {
-    let mut greeting: String = "Hello, ".to_owned();
+pub fn get(name: &String) -> GreetingResponse {
+    let mut greeting: String = String::from("Hello, ");
     greeting.push_str(&name);
     greeting.push('!');
-
     GreetingResponse::new(greeting)
 }

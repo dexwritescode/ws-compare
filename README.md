@@ -47,10 +47,18 @@ Three, functionally similar web services, written in Java, Go, and Rust.
 
 ## Rust
 ### Dependencies
+* [Actix](https://github.com/actix/actix)
+* [Actix web](https://github.com/actix/actix-web)
+* [Serde](https://serde.rs/)
 ### Build
-### Run
+    cargo build --release
 
-## Testing it
+  The compiled program should be in `ws-compare/rust/target/release` folder:
+    webservice
+### Run
+    ./webservice
+
+# Testing it
   For example, using curl:  
 
     curl http://localhost:8080/fibonacci/20
@@ -70,7 +78,16 @@ Three, functionally similar web services, written in Java, Go, and Rust.
 
     wrk -t2 -c400 -d30s http://127.0.0.1:8080/fibonacci/25 --timeout 5
 
-## Notes:
+## Using [vegeta](https://github.com/tsenart/vegeta)
+  Run for 30 seconds, 2 workers, no rate limiting
+
+    echo "GET http://localhost:8080/fibonacci/25" | vegeta attack -duration=30s -rate=0 -max-workers=2 | tee results.bin | vegeta report
+
+  Generate graph
+  
+    vegeta plot > plot.html
+
+# Notes:
 - The code is not suitable for production use. And is not idiomatic to each language. Also, lacks tests and documentation.
 - This project I wrote to compare some metrics using different programming languages. The metrics I was looking for:
     - Compiled artifact size

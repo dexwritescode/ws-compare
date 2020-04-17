@@ -15,5 +15,10 @@ serde = "1.0.106"
 [profile.dev]
 opt-level = 0
 
+[profile.release.package."*"]
+codegen-units = 1
+opt-level = 3
+
 [profile.release]
 opt-level = 3
+lto = true

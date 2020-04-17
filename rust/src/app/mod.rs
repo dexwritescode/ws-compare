@@ -2,6 +2,7 @@ use actix_web::{HttpServer, App, web};
 
 mod hello;
 mod greet;
+mod fibonacci;
 
 pub fn start() {
     let bind_address = "127.0.0.1:8080";
@@ -18,6 +19,7 @@ pub fn start() {
 fn routes(app: &mut web::ServiceConfig) {
     app
         .route("/", web::get().to(hello::get))
-        .route("/greeting/{name}", web::get().to(greet::get));
+        .route("/greeting/{name}", web::get().to(greet::get))
+        .route("/fibonacci/{input}", web::get().to(fibonacci::get));
 }
 
