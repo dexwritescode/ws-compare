@@ -1,18 +1,18 @@
 use serde::Serialize;
 
 #[derive(Serialize)]
-pub struct HelloResponse<'a> {
-    pub message: &'a str,
+pub struct HelloResponse {
+    pub message: String,
 }
 
-impl<'a> HelloResponse<'a> {
+impl HelloResponse {
     fn get() -> Self {
         HelloResponse {
-            message: "Hello, World!"
+            message: "Hello, World!".to_owned()
         }
     }
 }
 
-pub fn get<'a>() -> HelloResponse<'a> {
+pub fn get() -> HelloResponse {
     HelloResponse::get()
 }
