@@ -18,7 +18,7 @@ pub fn start() {
 
 fn routes(app: &mut web::ServiceConfig) {
     app
-        .route("/", web::get().to(hello::get))
+        .route("/hello", web::get().to(hello::get))
         .route("/greeting/{name}", web::get().to(greet::get))
         .route("/fibonacci/{input}", web::get().to(fibonacci::get));
 }
