@@ -2,13 +2,13 @@ use serde::Serialize;
 
 #[derive(Serialize)]
 pub struct GreetingResponse {
-    pub greet: String,
+    pub greeting: String,
 }
 
 impl GreetingResponse {
     pub fn new(greeting: String) -> Self {
         GreetingResponse {
-            greet: greeting
+            greeting
         }
     }
 }
