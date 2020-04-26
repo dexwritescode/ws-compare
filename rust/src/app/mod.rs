@@ -5,7 +5,7 @@ mod greet;
 mod fibonacci;
 
 pub fn start() {
-    let bind_address = "127.0.0.1:8080";
+    let bind_address = "0.0.0.0:8080";
     HttpServer::new(|| {
         App::new().configure(routes)
         })

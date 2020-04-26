@@ -87,9 +87,19 @@ Three, functionally similar web services, written in Java, Go, and Rust.
   
     vegeta plot > plot.html
 
+## Docker
+### Build
+  Example: while in the java directory, run the command:
+
+    docker build -t java/webservice:1.0 .
+
+### Run 
+
+    docker run -p 8080:8080 java/webservice:1.0
+
 # Notes:
 - The code is not suitable for production use. And is not idiomatic to each language. Also, lacks tests and documentation.
-- This project I wrote to compare some metrics using different programming languages. The metrics I was looking for:
+- This project was written to compare some metrics using different programming languages. The metrics I was looking for:
     - Compiled artifact size
     - Size in memory while running idle
     - Size in memory while running at peak requests per second
