@@ -15,11 +15,14 @@ impl FibonacciResponse {
     }
 }
 
-fn fibonacci(number: i64) -> i64 {
-    if number <= 1 {
-        return number;
+pub fn fibonacci(n: i64) -> i64 {
+    fn fibonacci_lr(n: i64, a: i64, b: i64) -> i64 {
+        match n {
+            0 => a,
+            _ => fibonacci_lr(n - 1, a + b, a),
+        }
     }
-    return fibonacci(number-1) + fibonacci(number-2)
+    fibonacci_lr(n, 1, 0)
 }
 
 pub fn get(input: i64) -> FibonacciResponse {
